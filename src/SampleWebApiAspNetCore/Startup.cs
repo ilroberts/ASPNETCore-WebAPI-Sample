@@ -33,7 +33,12 @@ namespace SampleWebApiAspNetCore
             services.AddTransient<IHouseMapper, HouseMapper>();
             
             // Add framework services.
-            services.AddMvcCore().AddJsonFormatters();
+            services.AddMvcCore().AddApiExplorer().AddJsonFormatters();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "Sample Api", Version = "V1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +49,12 @@ namespace SampleWebApiAspNetCore
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sample Api");
+            });
 
             app.UseMvc();
         }
