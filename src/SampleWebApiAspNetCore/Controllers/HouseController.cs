@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using SampleWebApiAspNetCore.Models;
 using SampleWebApiAspNetCore.Repositories;
 using SampleWebApiAspNetCore.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SampleWebApiAspNetCore.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class HouseController : Controller
     {
